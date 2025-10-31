@@ -1,5 +1,5 @@
 const studentFields = [
-  { name: "Name", id: "userName", placeholder: "Enter your name", type: "text" },
+  { name: "Name", id: "userName", placeholder: "Enter your name", type: "text", value: `${student.userName}`},
   { name: "Email", id: "userEmail", placeholder: "Enter your email", type: "email" },
   { name: "ID", id: "userPassword", placeholder: "Enter ID", type: "number" },
   { name: "Age", id: "userAge", placeholder: "Enter your age", type: "number" },
@@ -79,5 +79,5 @@ function saveStudent(studentObj) {
   const students = JSON.parse(localStorage.getItem("students")) || [];
   students.push(studentObj);
   localStorage.setItem("students", JSON.stringify(students));
-  window.location.href = "../index.html";
+  window.location.href = "../pages/edit.html";
 }
