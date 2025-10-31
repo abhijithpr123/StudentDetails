@@ -2,102 +2,240 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: serif;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
-  background-color: #f9dcdc;
+  background: linear-gradient(135deg, #a8edea, #fed6e3);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: bgFade 1.2s ease-in-out;
 }
 
 form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 70%;
-  background-color: #fff;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-form div {
-  width: 48%;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
-
-label {
-  margin-bottom: 6px;
-  font-weight: bold;
-  color: #333;
-}
-
-input {
-  height: 40px;
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  outline: none;
-  transition: 0.3s;
-}
-
-input:focus {
-  border-color: #e86b6b;
-  box-shadow: 0 0 3px rgba(232, 107, 107, 0.5);
-}
-
-.btn {
-  width: 100%;
-  text-align: center;
-}
-
-.btn button {
-  width: 150px;
-  height: 40px;
-  border: none;
-  background-color: #e86b6b;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.btn button:hover {
-  background-color: #c95555;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr) 300px;
+  gap: 25px 40px;
+  background: #ffffffee;
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 40px 50px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 1100px;
+  animation: formEnter 0.8s ease forwards;
+  opacity: 0;
 }
 
 .input-group {
-  width: 48%;
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  width: 100%;
+  animation: fadeUp 0.8s ease forwards;
+  opacity: 0;
+}
+
+.input-group:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.input-group:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.input-group:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.input-group:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+input {
+  height: 42px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  border-color: #8c52ff;
+  box-shadow: 0 0 5px rgba(140, 82, 255, 0.4);
+  transform: scale(1.02);
 }
 
 .error {
   color: red;
-  font-size: 13px;
-  margin-top: 4px;
-  height: 14px;
+  font-size: 12px;
+  margin-top: 3px;
+  min-height: 14px;
 }
 
-.error-border {
-  border: 1px solid red !important;
+.file-group {
+  grid-column: 3 / 4;
+  grid-row: 1 / span 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  animation: fadeInRight 1s ease forwards;
+  opacity: 0;
+  animation-delay: 0.5s;
 }
 
-@media (max-width: 768px) {
+.file-group label {
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+input[type="file"] {
+  border: none;
+  background: #f6f6f6;
+  border-radius: 8px;
+  padding: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+input[type="file"]:hover {
+  background: #e0d8ff;
+}
+
+.image-preview {
+  width: 180px;
+  height: 180px;
+  border-radius: 12px;
+  border: 2px solid #8c52ff;
+  margin-top: 15px;
+  object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeZoom 1s ease forwards;
+  opacity: 0;
+  animation-delay: 0.7s;
+}
+
+.image-preview:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(140, 82, 255, 0.3);
+}
+
+.btn {
+  grid-column: 1 / 4;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  animation: fadeUp 1s ease forwards;
+  opacity: 0;
+  animation-delay: 0.8s;
+}
+
+.btn button {
+  width: 160px;
+  height: 42px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn button:hover {
+  transform: scale(1.08);
+  background: linear-gradient(135deg, #2575fc, #6a11cb);
+  box-shadow: 0 5px 15px rgba(37, 117, 252, 0.4);
+}
+
+@media (max-width: 900px) {
   form {
-    width: 90%;
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    width: 95%;
+    padding: 30px;
   }
 
-  form div {
-    width: 100%;
+  .file-group {
+    grid-column: 1 / 2;
+    grid-row: auto;
+    margin-top: 20px;
+  }
+
+  .image-preview {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+@keyframes bgFade {
+  from {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes formEnter {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeZoom {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }

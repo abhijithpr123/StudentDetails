@@ -34,13 +34,13 @@ window.addEventListener("DOMContentLoaded", () => {
     });
     document.getElementById("edit-btn").addEventListener("click", () => {
         console.log("edit")
-        window.location.href = "../pages/edit.html"
+        window.location.href = `../pages/edit.html?id=${id}`
     });
     document.getElementById("delete-btn").addEventListener("click", () => {
         const confirmDelete = confirm("Are you sure you want to delete this student?");
-    if (!confirmDelete) return;
-    students.splice(id, 1);
-    localStorage.setItem("students", JSON.stringify(students));
-    window.location.href = "../index.html";
+        if (!confirmDelete) return;
+        students.splice(id, 1);
+        localStorage.setItem("students", JSON.stringify(students));
+        window.location.href = "../index.html";
     });
 });

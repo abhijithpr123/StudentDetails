@@ -1,5 +1,5 @@
 const studentFields = [
-  { name: "Name", id: "userName", placeholder: "Enter your name", type: "text", value: `${student.userName}`},
+  { name: "Name", id: "userName", placeholder: "Enter your name", type: "text" },
   { name: "Email", id: "userEmail", placeholder: "Enter your email", type: "email" },
   { name: "ID", id: "userPassword", placeholder: "Enter ID", type: "number" },
   { name: "Age", id: "userAge", placeholder: "Enter your age", type: "number" },
@@ -11,73 +11,104 @@ const studentFields = [
   { name: "Profile Picture", id: "userImage", placeholder: "Choose Image", type: "file" },
 ];
 
-function renderForm() {
-  const form = document.getElementById("form");
-  form.innerHTML =
-    studentFields
-      .map(
-        (field) => `
+window.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  const students = JSON.parse(localStorage.getItem("students")) || [];
+  const student = students[id];
+
+  if (!student) {
+    document.body.innerHTML = "<h2>Student not found!</h2>";
+    return;
+  }
+
+  let previewImageBase64 = student.pic || "";
+
+  const form = document.getElementById("editForm");
+
+  const container = document.createElement("div");
+  container.classList.add("form-container");
+
+  const leftDiv = document.createElement("div");
+  leftDiv.classList.add("form-left");
+
+  const rightDiv = document.createElement("div");
+  rightDiv.classList.add("form-right");
+
+  leftDiv.innerHTML = studentFields
+    .filter((f) => f.type !== "file")
+    .map(
+      (field) => `
       <div class="input-group">
         <label for="${field.id}">${field.name}</label>
-        <input id="${field.id}" type="${field.type}" placeholder="${field.placeholder}">
+        <input id="${field.id}" type="${field.type}" placeholder="${field.placeholder}" 
+          value="${student[field.id] || ""}">
         <small class="error" id="error-${field.id}"></small>
       </div>
     `
-      )
-      .join("") +
-    `
-    <div class="btn">
-      <button type="submit">Submit</button>
-    </div>
+    )
+    .join("");
+
+  rightDiv.innerHTML = `
+    <h3>Preview</h3>
+    <img id="imagePreview" class="image-preview" src="${previewImageBase64}" alt="Preview">
+    <input id="userImage" type="file" accept="image/*">
   `;
-}
-renderForm();
 
-document.getElementById("form").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const obj = {};
-  let isValid = true;
+  container.appendChild(leftDiv);
+  container.appendChild(rightDiv);
 
-  document.querySelectorAll(".error").forEach((el) => (el.textContent = ""));
-  document.querySelectorAll("input").forEach((el) => el.classList.remove("error-border"));
+  const btnDiv = document.createElement("div");
+  btnDiv.classList.add("btn");
+  btnDiv.innerHTML = `<button type="submit">Submit</button>`;
 
-  studentFields.forEach((f) => {
-    const input = document.getElementById(f.id);
-    const errorEl = document.getElementById(`error-${f.id}`);
-
-    if (f.type === "file") {
-      if (input.files.length === 0) {
-        errorEl.textContent = `Please upload your ${f.name}`;
-        input.classList.add("error-border");
-        isValid = false;
-        return;
-      }
-    } else if (input.value.trim() === "") {
-      errorEl.textContent = `${f.name} is required`;
-      input.classList.add("error-border");
-      isValid = false;
-      return;
-    }
-
-    if (f.type !== "file") obj[f.id] = input.value.trim();
-  });
-
-  if (!isValid) return;
+  form.innerHTML = "";
+  form.appendChild(container);
+  form.appendChild(btnDiv);
 
   const fileInput = document.getElementById("userImage");
-  const file = fileInput.files[0];
+  const imagePreview = document.getElementById("imagePreview");
 
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    obj.pic = e.target.result;
-    saveStudent(obj);
-  };
-  reader.readAsDataURL(file);
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        previewImageBase64 = e.target.result;
+        imagePreview.src = previewImageBase64;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let isValid = true;
+    const updatedStudent = {};
+
+    document.querySelectorAll(".error").forEach((el) => (el.textContent = ""));
+    document.querySelectorAll("input").forEach((el) => el.classList.remove("error-border"));
+
+    studentFields.forEach((f) => {
+      const input = document.getElementById(f.id);
+      const errorEl = document.getElementById(`error-${f.id}`);
+      if (!input || f.type === "file") return;
+
+      if (input.value.trim() === "") {
+        errorEl.textContent = `${f.name} is required`;
+        input.classList.add("error-border");
+        isValid = false;
+      }
+      updatedStudent[f.id] = input.value.trim();
+    });
+
+    if (!isValid) return;
+
+    updatedStudent.pic = previewImageBase64;
+
+    students[id] = updatedStudent;
+    localStorage.setItem("students", JSON.stringify(students));
+
+    window.location.href = `../pages/profile.html?id=${id}`;
+  });
 });
-
-function saveStudent(studentObj) {
-  const students = JSON.parse(localStorage.getItem("students")) || [];
-  students.push(studentObj);
-  localStorage.setItem("students", JSON.stringify(students));
-  window.location.href = "../pages/edit.html";
-}

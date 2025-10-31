@@ -2,57 +2,92 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Times New Roman", serif;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #f4f6f8;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .main {
-  background-color: #f9dcdc;
-  min-height: 100vh;
   text-align: center;
-  padding: 20px;
+  padding: 40px 20px;
+  animation: fadeIn 1s ease-in-out;
 }
 
 .add {
-  margin: 20px 0 40px 0;
+  margin: 30px 0 50px 0;
+  animation: slideDown 0.8s ease;
 }
 
 .add button {
-  background: linear-gradient(to bottom, #33ccff 0%, #ee0b0b 100%);
+  background-color: #0078d7;
   color: white;
   border: none;
-  padding: 12px 25px;
-  font-size: 18px;
+  padding: 12px 35px;
+  font-size: 17px;
+  font-weight: 600;
   border-radius: 8px;
   cursor: pointer;
-  transition: 0.3s ease;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 10px rgba(0, 120, 215, 0.3);
+  position: relative;
 }
 
 .add button:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
+  background-color: #005fa3;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 18px rgba(0, 120, 215, 0.4);
+}
+
+.add button::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 10px;
+  background: rgba(0, 120, 215, 0.2);
+  opacity: 0;
+  animation: pulse 2.5s infinite ease-in-out;
 }
 
 .cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 25px;
+  gap: 30px;
+  animation: fadeInUp 1s ease-in-out;
 }
 
 .card {
-  width: 220px;
-  background-color: #fff8f8;
-  border-radius: 12px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
-  padding: 10px;
+  width: 240px;
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  padding: 18px;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.4s ease;
+  border: 1px solid #e0e0e0;
+  opacity: 0;
+  animation: fadeCard 1s forwards;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: rgba(0, 0, 0, 0.45) 0px 8px 20px;
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 10px 25px rgba(0, 120, 215, 0.2);
+  border-color: #0078d7;
+}
+
+.card:nth-child(odd) {
+  animation-delay: 0.2s;
+}
+
+.card:nth-child(even) {
+  animation-delay: 0.4s;
 }
 
 .card img {
@@ -60,21 +95,106 @@
   height: 150px;
   border-radius: 10px;
   object-fit: cover;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  transition: transform 0.4s ease;
+}
+
+.card:hover img {
+  transform: scale(1.05);
 }
 
 .card h3 {
-  margin: 6px 0;
-  color: #222;
+  font-size: 18px;
+  color: #1e1e1e;
+  margin-bottom: 6px;
+  font-weight: 600;
 }
 
 .card p {
-  margin: 4px 0;
-  color: #444;
+  color: #555;
   font-size: 14px;
+  margin-bottom: 4px;
+  line-height: 1.4;
 }
 
 .card-link {
   text-decoration: none;
   color: inherit;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeCard {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+@media (max-width: 768px) {
+  .cards {
+    gap: 20px;
+  }
+
+  .card {
+    width: 90%;
+  }
+
+  .add button {
+    width: 80%;
+    font-size: 16px;
+  }
 }
