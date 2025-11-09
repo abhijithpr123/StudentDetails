@@ -22,5 +22,5 @@ window.addEventListener("DOMContentLoaded", () => {
 
 function openProfile(index) {
   localStorage.setItem("selectedStudentIndex", index);
-  window.location.href = "profile.html";
+  window.location.href = "../pages/profile.html";
 }
