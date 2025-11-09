@@ -8,7 +8,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   cardsContainer.innerHTML = students.map((student, index) => `
-    <a href="../pages/profile.html?id=${index}" class="card-link">
+    <a href="./pages/profile.html?id=${index}" class="card-link">
       <div class="card">
         <img src="${student.userImage || student.pic || ''}" alt="Student Picture">
         <h3>${student.userName || "No Name"}</h3>
@@ -22,5 +22,5 @@ window.addEventListener("DOMContentLoaded", () => {
 
 function openProfile(index) {
   localStorage.setItem("selectedStudentIndex", index);
-  window.location.href = "../pages/profile.html";
+  window.location.href = "./pages/profile.html";
 }
