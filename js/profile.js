@@ -15,7 +15,7 @@ window.addEventListener("DOMContentLoaded", () => {
     details.innerHTML = `
     <h2>${student.userName || "No Name"}</h2>
     <p><strong>Email:</strong> ${student.userEmail || "N/A"}</p>
-    <p><strong>ID:</strong> ${student.userPassword || "N/A"}</p>
+    <p><strong>ID:</strong> ${student.userId || "N/A"}</p>
     <p><strong>Age:</strong> ${student.userAge || "N/A"}</p>
     <p><strong>Phone:</strong> ${student.userPhone || "N/A"}</p>
     <p><strong>Address:</strong> ${student.userAddress || "N/A"}</p>

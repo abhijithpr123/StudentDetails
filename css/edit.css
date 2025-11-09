@@ -6,11 +6,12 @@
 }
 
 body {
-  background: linear-gradient(135deg, #a8edea, #fed6e3);
+  background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #e6e6e6;
 }
 
 form {
@@ -19,11 +20,12 @@ form {
   align-items: center;
   width: 80%;
   max-width: 900px;
-  background: #ffffffd9;
+  background: rgba(30, 30, 30, 0.85);
   backdrop-filter: blur(10px);
   border-radius: 15px;
   padding: 40px 50px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid #333;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 .form-container {
@@ -49,27 +51,29 @@ form {
 label {
   font-weight: 600;
   margin-bottom: 6px;
-  color: #333;
+  color: #cccccc;
   font-size: 14px;
 }
 
 input {
   height: 38px;
-  padding: 6px 10px;
-  border: 1px solid #ccc;
+  padding: 8px 12px;
+  background: #1f1f1f;
+  border: 1px solid #444;
   border-radius: 6px;
+  color: #e6e6e6;
   outline: none;
   transition: 0.3s;
   font-size: 14px;
 }
 
 input:focus {
-  border-color: #7b68ee;
-  box-shadow: 0 0 5px rgba(123, 104, 238, 0.3);
+  border-color: #6a5acd;
+  box-shadow: 0 0 6px rgba(106, 90, 205, 0.4);
 }
 
 .error {
-  color: red;
+  color: #ff4d4d;
   font-size: 12px;
   margin-top: 3px;
   min-height: 14px;
@@ -83,6 +87,7 @@ input:focus {
 .form-right h3 {
   font-size: 16px;
   margin-bottom: 10px;
+  color: #dcdcdc;
   font-weight: 600;
 }
 
@@ -90,9 +95,9 @@ input:focus {
   width: 180px;
   height: 180px;
   border-radius: 12px;
-  border: 2px solid #ccc;
+  border: 2px solid #555;
   object-fit: cover;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.6);
   transition: transform 0.3s ease;
 }
 
@@ -115,7 +120,7 @@ input[type="file"] {
   width: 180px;
   height: 45px;
   border: none;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #6a5acd, #483d8b);
   color: white;
   font-size: 16px;
   font-weight: 600;
@@ -125,7 +130,7 @@ input[type="file"] {
 }
 
 .btn button:hover {
-  background: linear-gradient(135deg, #7a93ff, #8b5fd3);
+  background: linear-gradient(135deg, #7b68ee, #5a4fb6);
   transform: scale(1.05);
 }
 

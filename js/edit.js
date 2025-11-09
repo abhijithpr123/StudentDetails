@@ -1,14 +1,13 @@
 const studentFields = [
   { name: "Name", id: "userName", placeholder: "Enter your name", type: "text" },
   { name: "Email", id: "userEmail", placeholder: "Enter your email", type: "email" },
-  { name: "ID", id: "userPassword", placeholder: "Enter ID", type: "number" },
+  { name: "ID", id: "userId", placeholder: "Enter ID", type: "number" },
   { name: "Age", id: "userAge", placeholder: "Enter your age", type: "number" },
   { name: "Phone", id: "userPhone", placeholder: "Enter phone number", type: "tel" },
   { name: "Address", id: "userAddress", placeholder: "Enter your address", type: "text" },
   { name: "City", id: "userCity", placeholder: "Enter city", type: "text" },
   { name: "Pincode", id: "userPincode", placeholder: "Enter pincode", type: "number" },
   { name: "DOB", id: "userDob", placeholder: "Select date of birth", type: "date" },
-  { name: "Profile Picture", id: "userImage", placeholder: "Choose Image", type: "file" },
 ];
 
 window.addEventListener("DOMContentLoaded", () => {
